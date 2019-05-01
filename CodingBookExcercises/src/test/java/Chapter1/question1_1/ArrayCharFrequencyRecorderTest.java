@@ -31,6 +31,18 @@ class ArrayCharFrequencyRecorderTest {
 	}
 	
 	@Test
+	void recordsLowerA() {
+		char letterA = 'a';
+		checkSingleCharRecorded(letterA);
+	}
+
+	@Test
+	void recordsLowerZ() {
+		char letterZ = 'z';
+		checkSingleCharRecorded(letterZ);
+	}
+	
+	@Test
 	void recordsMultiple() {
 		char letterM = 'M';
 		checkCharRecordedTimes(letterM,3);

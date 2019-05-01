@@ -1,12 +1,13 @@
 package Chapter1.question1_1;
 
 class ArrayCharFrequencyRecorder implements CharFrequencyRecorder {
-	private static final int asciiAlphabetStartCode = 97;
+	private static final int asciiLowerAlphabetStartCode = 97;
+	private static final int asciiUpperAlphabetStartCode = 1;
 	private int frequencyArray[];
 	
 	
 	protected ArrayCharFrequencyRecorder() {
-		frequencyArray = new int[26];
+		frequencyArray = new int[90];
 	}
 
 	public void recordOccurrence(char character) {
@@ -17,10 +18,22 @@ class ArrayCharFrequencyRecorder implements CharFrequencyRecorder {
 	}
 	
 	private int getPlaceInAlphabet(char character) {
-		char lowerCase = Character.toLowerCase(character);
-		int charAsciiCode = (int) lowerCase;
+		int charAsciiCode = (int) character;
+		int asciiAlphabetStartCode = getAsciiAlphabetStartCode(character);
 		int alphabetPlace = charAsciiCode - asciiAlphabetStartCode;
 		return alphabetPlace;
+	}
+	
+	private int getAsciiAlphabetStartCode(char character) {
+		int AsciiAlphabetStartCode;
+		boolean isCharacterUppercase = Character.isUpperCase(character);
+		if (isCharacterUppercase){
+			AsciiAlphabetStartCode = asciiUpperAlphabetStartCode;
+		}
+		else {
+			AsciiAlphabetStartCode = asciiLowerAlphabetStartCode;
+		}
+		return AsciiAlphabetStartCode;
 	}
 
 	public int getOccurences(char character) {

@@ -34,12 +34,20 @@ class DuplicateCheckerTest {
 				   .when(frequencyRecorder)
 				   .getOccurences(characterOfAlphabet);
         }
+		
+		for(char characterOfAlphabet = 'A'; characterOfAlphabet <='Z'; characterOfAlphabet ++ )
+        {
+			Mockito.lenient()
+				   .doReturn(1,2)
+				   .when(frequencyRecorder)
+				   .getOccurences(characterOfAlphabet);
+        }
 	}
 
 	@Test
 	void hasDuplicateLetters() {
 		boolean hasDuplicate;
-		String testString = "abcdddefg";
+		String testString = "abcddefg";
 		hasDuplicate = duplicateChecker.checkForDuplicates(testString);
 		assertTrue(hasDuplicate);
 	}
@@ -47,7 +55,7 @@ class DuplicateCheckerTest {
 	@Test
 	void lacksDuplicateLetters() {
 		boolean hasDuplicate;
-		String testString = "abcdefg";
+		String testString = "abcdDefg";
 		hasDuplicate = duplicateChecker.checkForDuplicates(testString);
 		assertFalse(hasDuplicate);
 	}
