@@ -9,9 +9,12 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 class PalindromePermutationChecker {
+	private static final IntPredicate isOddLambda = i -> (i%2) != 0;
+	private static final IntPredicate isWhiteSpaceLambda = i->!Character.isWhitespace(i);
+	private static final IntUnaryOperator toLowerCaseLambda = i->Character.toLowerCase(i);
+	
 	private CharFrequencyRecorder frequencyRecorder;
 	private IntUnaryOperator getOccurencesLambda;
-	private IntPredicate isOddLambda = i -> (i%2) != 0;
 	
 	protected PalindromePermutationChecker(CharFrequencyRecorder frequencyRecorder) {
 		this.frequencyRecorder = frequencyRecorder;
@@ -29,11 +32,11 @@ class PalindromePermutationChecker {
 		int oddOccurencesLimit = this.getOddOccurencesLimit(stringToCheck);
 		
 		boolean oddOccurencesBelowLimit = stringToCheck.chars()
-										  .filter(i->!Character.isWhitespace(i))
-										  .map(i->Character.toLowerCase(i))
-							  	     	  .map(this.getOccurencesLambda)
-							  	          .filter(isOddLambda)
- 							  		      .count() <= oddOccurencesLimit;
+													   .filter(isWhiteSpaceLambda)
+													   .map(toLowerCaseLambda)
+										  	     	   .map(getOccurencesLambda)
+										  	           .filter(isOddLambda)
+			 							  		       .count() <= oddOccurencesLimit;
 		
 		return oddOccurencesBelowLimit;
 	}
