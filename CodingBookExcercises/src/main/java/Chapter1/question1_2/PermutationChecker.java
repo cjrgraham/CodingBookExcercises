@@ -17,26 +17,31 @@ class PermutationChecker {
 	}
 	
 	public boolean checkStringsArePermutations(String stringA, String stringB) {
-		boolean arePermutations = false;
+		boolean arePermutations;
 		
 		if (stringA.length()!=stringB.length()) {
 			arePermutations = false;
-			return arePermutations;
 		}
-		
-		this.balanceOccurences(stringA,stringB);
-		
-		arePermutations = this.checkStringOccurencesCancelOut(stringA,stringB);
+		else
+		{
+			arePermutations = this.checkStringsHaveSameLetters(stringA,stringB);
+		}
 		
 		return arePermutations;
 	}
 	
-	private void balanceOccurences(String stringA,String stringB) {
+	private boolean checkStringsHaveSameLetters(String stringA, String stringB) {
+		this.tryBalanceOccurences(stringA,stringB);
+		boolean haveSameLetters = this.checkStringOccurencesBalance(stringA,stringB);
+		return haveSameLetters;
+	}
+	
+	private void tryBalanceOccurences(String stringA,String stringB) {
 		this.recordOccurences(stringA);
 		this.removeOccurences(stringB);
 	}
 	
-	private boolean checkStringOccurencesCancelOut(String stringA, String stringB) {
+	private boolean checkStringOccurencesBalance(String stringA, String stringB) {
 		boolean occurencesCancelOut = false;
 		
 		IntStream stringACharStream = stringA.chars();
