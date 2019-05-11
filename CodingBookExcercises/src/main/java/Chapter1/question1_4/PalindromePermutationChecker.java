@@ -34,6 +34,7 @@ class PalindromePermutationChecker {
 		boolean oddOccurencesBelowLimit = stringToCheck.chars()
 													   .filter(isWhiteSpaceLambda)
 													   .map(toLowerCaseLambda)
+													   .distinct()
 										  	     	   .map(getOccurencesLambda)
 										  	           .filter(isOddLambda)
 			 							  		       .count() <= oddOccurencesLimit;
